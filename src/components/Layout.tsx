@@ -1,4 +1,4 @@
-import Titulo from "./titulo"
+import Titulo from "./Titulo"
 
 interface LayoutProps {
     titulo: string
