@@ -15,14 +15,9 @@ export default function Home() {
   const [clientes, setClientes] = useState<Cliente[]>([])
   const [visivel, setVisivel] = useState<'tabela' | 'form'>('tabela')
 
-  useEffect(obterTodos, [])
-  
-  function obterTodos() {
-    repo.obterTodos().then(cliente => {
-      setClientes(clientes)
-      setVisivel('tabela')
-    })
-  }
+  useEffect(() => {
+    repo.obterTodos().then(setClientes)
+  }, [])
 
   // const clientes = [
   //   new Cliente('Ana', 34, '1'),
@@ -36,9 +31,8 @@ export default function Home() {
     setVisivel('form')
   }
 
-  async function clienteExcluido( cliente: Cliente) {
-    await repo.excluir(cliente)
-    obterTodos()
+  function clienteExcluido( cliente: Cliente) {
+    console.log(`Excluir... ${cliente.nome}`)
   }
 
   function novoCliente() {
@@ -46,9 +40,9 @@ export default function Home() {
     setVisivel('form')
   }
 
-  async function salvarCliente(cliente: Cliente) {
-    await repo.salvar(cliente)
-    obterTodos()
+  function salvarCliente(cliente: Cliente) {
+    console.log(cliente)
+    setVisivel('tabela')
   }
 
 

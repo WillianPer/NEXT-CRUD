@@ -12,7 +12,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
         },
 
         fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): Cliente {
-            const dados = snapshot.data(options)
+            const dados = snapshot/*?*/.data(options)
             return new Cliente(dados.nome, dados.idade, snapshot.id)
         }
 
@@ -25,7 +25,7 @@ export default class ColecaoCliente implements ClienteRepositorio {
         } else {
             const docRef = await this.colecao().add(cliente)
             const doc = await docRef.get()
-            return doc.data()
+            return doc.data().id()
         }
     }
 
