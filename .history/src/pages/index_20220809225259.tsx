@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
+import ColecaoCliente from "../backend/db/ColecaoClientes";
 import Botao from "../components/Botao";
 import Formulario from "../components/Formulario";
 import Layout from "../components/Layout";
 import Tabela from "../components/Tabela";
+import Cliente from "../core/Cliente";
+import ClienteRepositorio from "../core/ClienteRepositorio";
 import useClientes from "../hooks/useClientes";
 
 export default function Home() {
@@ -91,7 +95,7 @@ export default function Home() {
           <Formulario 
             cliente={cliente}
             clienteMudou={salvarCliente}
-            cancelado={exibirTabela}/>
+            cancelado={() => setVisivel('tabela')}/>
 
         )}
         

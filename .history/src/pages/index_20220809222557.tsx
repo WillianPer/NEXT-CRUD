@@ -1,21 +1,16 @@
+import { useEffect, useState } from "react";
+import ColecaoCliente from "../backend/db/ColecaoClientes";
 import Botao from "../components/Botao";
 import Formulario from "../components/Formulario";
 import Layout from "../components/Layout";
 import Tabela from "../components/Tabela";
+import Cliente from "../core/Cliente";
+import ClienteRepositorio from "../core/ClienteRepositorio";
 import useClientes from "../hooks/useClientes";
 
 export default function Home() {
 
-  const {
-    cliente, 
-    clientes,
-    novoCliente,
-    exibirTabela,
-    salvarCliente,
-    tabelaVisivel,
-    excluirCliente,
-    selecionarCliente
-  } = useClientes()
+  const {selecionarCliente, excluirCliente, cliente, clientes} = useClientes()
 
   // const repo: ClienteRepositorio = new ColecaoCliente()
 
@@ -67,7 +62,7 @@ export default function Home() {
 
       <Layout titulo="Cadastro Simples">
 
-        {tabelaVisivel ? (
+        {visivel === 'tabela' ? (
 
           <>
 
@@ -91,7 +86,7 @@ export default function Home() {
           <Formulario 
             cliente={cliente}
             clienteMudou={salvarCliente}
-            cancelado={exibirTabela}/>
+            cancelado={() => setVisivel('tabela')}/>
 
         )}
         
